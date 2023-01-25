@@ -5,11 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
+import java.util.UUID;
 
 
 public class BaseTest {
@@ -57,5 +59,37 @@ public class BaseTest {
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.clear();
         emailField.sendKeys(email);
+    }
+
+    public static void clickSaveButton() {
+
+        WebElement saveButton = driver.findElement(By.cssSelector("button.btn-submit"));
+        saveButton.click();
+    }
+
+    public static void provideProfileName(String randomName) {
+
+        WebElement profileName = driver.findElement(By.cssSelector("[name='name']"));
+        profileName.clear();
+        profileName.sendKeys(randomName);
+    }
+
+    public static void provideCurrentPassword(String password) {
+
+        WebElement currentPassword = driver.findElement(By.cssSelector("[name='current_password']"));
+        currentPassword.clear();
+        currentPassword.sendKeys(password);
+
+    }
+
+    public static String generateRandomName() {
+
+        return UUID.randomUUID().toString().replace("-","");
+    }
+
+    public static void clickAvatarIcon() {
+
+        WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
+        avatarIcon.click();
     }
 }
