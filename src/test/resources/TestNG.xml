@@ -3,7 +3,7 @@
 
 <suite name="TestNG">
 
-    <test name="Smoke Tests" preserve-order="false">
+    <test name="Example Tests" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
@@ -12,6 +12,3 @@
             <class name="ProfileTests"/>
         </classes>
     </test>
-
-
-</suite>

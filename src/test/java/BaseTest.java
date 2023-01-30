@@ -6,9 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 import java.util.UUID;
@@ -30,17 +28,27 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public static void launchBrowser(){
+    @Parameters({"BaseURL"})
+    public static void launchBrowser(String BaseURL){
 
         LoginTests.driver = new ChromeDriver();
         LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get(BaseURL);
     }
 
-    protected static void navigateToPage() {
+    public static void login(String email, String password){
+
+        provideEmail(email);
+        providePassword(password);
+        clickSubmit();
+
+    }
+
+/*    protected static void navigateToPage() {
 
         String url = "https://bbb.testpro.io/";
         driver.get(url);
-    }
+    }*/
 
     public static void clickSubmit() {
         WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
@@ -91,5 +99,14 @@ public class BaseTest {
 
         WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
         avatarIcon.click();
+    }
+
+    @DataProvider(name="incorrectLoginProviders")
+    public static Object[][] getDataFromDataProviders(){
+
+        return new Object[][]{
+                {"invalid@email.com","invalidPass"},
+                {"demo@class.com", "invalid"},
+                {"",""}};
     }
 }
