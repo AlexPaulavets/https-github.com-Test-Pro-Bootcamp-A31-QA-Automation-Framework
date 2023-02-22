@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -16,6 +18,8 @@ public class BaseTest {
 
     public static WebDriver driver = null;
     public static String url = "https://bbb.testpro.io/";
+
+    public static WebDriverWait wait = null;
 
     @BeforeSuite
     static void setupClass() {
@@ -32,8 +36,10 @@ public class BaseTest {
     public static void launchBrowser(String BaseURL){
 
         LoginTests.driver = new ChromeDriver();
-        LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(BaseURL);
+        driver.get(url);
+        wait = new WebDriverWait(LoginTests.driver, Duration.ofSeconds(10));
     }
 
     public static void login(String email, String password){
@@ -51,20 +57,28 @@ public class BaseTest {
     }*/
 
     public static void clickSubmit() {
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        //WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
+
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
         submitButton.click();
     }
 
     public static void providePassword(String password) {
 
-        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
+        //WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
+
+        //use this when method only takes WebElement
+        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']")));
+
         passwordField.clear();
         passwordField.sendKeys(password);
     }
 
     public static void provideEmail(String email) {
 
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+        //WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+        //Selenium Wait -
+        WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
         emailField.clear();
         emailField.sendKeys(email);
     }
