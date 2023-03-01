@@ -12,6 +12,7 @@
                     <include name="LoginEmptyEmailPasswordTest"/>
                 </methods>
             </class>
+            <class name="Homework19"></class>
         </classes>
     </test>
 
