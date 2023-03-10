@@ -2,6 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
 
@@ -16,13 +18,22 @@ public class LoginTests extends BaseTest {
     @Test(enabled = true, priority = 1, description = "LoginValidemailValidPasswordTest")
     public static void loginValidEmailValidPasswordTest () {
 
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
 
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        //homePage.getUserAvatar();
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmitBtn();
 
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
-        Assert.assertTrue(avatarIcon.isDisplayed());
+        //provideEmail("demo@class.com");
+        //providePassword("te$t$tudent");
+        //clickSubmit();
+
+        //WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
+        //Assert.assertTrue(avatarIcon.isDisplayed());
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
     }
 

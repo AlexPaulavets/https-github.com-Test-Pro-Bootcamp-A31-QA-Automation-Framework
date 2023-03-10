@@ -9,12 +9,13 @@ import java.util.List;
 
 public class Homework19 extends BaseTest{
 
+
     @Test
     public void DeletePlaylistTest(){
 
         String playlistName = "test playlist";
 
-        login("demo@class.com)", "te$t$tudent");
+        login("demo@class.com", "te$t$tudent");
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@title='Create a new playlist']"))).click();
 
         //WebElement addPlaylist = driver.findElement(By.xpath("//i[@title='Create a new playlist']"));

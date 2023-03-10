@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Regression">
+<suite name="Homework18 Tests">
 
     <parameter name="BaseURL" value="http://bbb.testpro.io"/>
 
     <test name="Example Tests" preserve-order="false">
         <classes>
-            <class name="Homework19" ></class>
-            <class name="LoginTests">
+            <class name="Homework18">
                 <methods>
-                    <include name="LoginEmptyEmailPasswordTest"/>
+                    <include name="testPlayASing"/>
                 </methods>
             </class>
-
         </classes>
     </test>
 
